@@ -9,7 +9,7 @@
 
   - dimension_group: purchased
     type: time
-    timeframes: [time, date, week, day_of_week, month]
+    timeframes: [date, week, day_of_week, month]
     sql: |
       CAST (${TABLE}.date as timestamp)
       
@@ -52,7 +52,7 @@
     sql: ${TABLE}.city
 
   - dimension: zipcode
-    type: string
+    type: zipcode
     sql: ${TABLE}.zipcode
 
   - dimension: store_location
@@ -144,9 +144,11 @@
     sql: ${TABLE}.state_btl_cost
 
   - dimension: btl_price
-    type: number
+    type: tier
+    tiers: [0,10,20,30,40,50,60,70,80,90,100]
+    style: classic
     sql: ${TABLE}.btl_price
-
+    
   - dimension: bottle_qty
     type: int
     sql: ${TABLE}.bottle_qty
