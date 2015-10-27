@@ -12,7 +12,24 @@
     timeframes: [time, date, week, day_of_week, month]
     sql: |
       CAST (${TABLE}.date as timestamp)
-
+      
+  - dimension: seasons_created
+    type: string 
+    sql: | 
+      CASE 
+        WHEN DAYOFYEAR(CAST(${TABLE}.date as timestamp)) > 356 
+          THEN 'WINTER'
+        WHEN DAYOFYEAR(CAST(${TABLE}.date as timestamp)) < 79 
+          THEN 'WINTER'
+        WHEN DAYOFYEAR(CAST(${TABLE}.date as timestamp)) BETWEEN 80 AND 170
+          THEN 'SPRING'
+        WHEN DAYOFYEAR(CAST(${TABLE}.date as timestamp)) BETWEEN 170 AND 265
+          THEN 'SUMMER'
+        WHEN DAYOFYEAR(CAST(${TABLE}.date as timestamp)) BETWEEN 265 AND 356
+          THEN 'FALL'
+        ELSE 'NO'
+      END
+      
   - dimension_group: convenience_store
     type: time
     timeframes: [time, date, week, month]
