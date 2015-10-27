@@ -12,3 +12,5 @@
 
 - explore: iowa
 
+- explore: liquor_fact
+
