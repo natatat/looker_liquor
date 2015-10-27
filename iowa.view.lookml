@@ -7,9 +7,11 @@
     type: count
     drill_fields: detail*
 
-  - dimension: date
-    type: string
-    sql: ${TABLE}.date
+  - dimension_group: purchased
+    type: time
+    timeframes: [time, date, week, day_of_week, month]
+    sql: |
+      CAST (${TABLE}.date as timestamp)
 
   - dimension_group: convenience_store
     type: time
